@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="utf-8">
+	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">-->
+</head>
+<body>
+	<!--<div class="page-header">-->
+	<h2 id="heading">Hand Sign Translator</h2>
+	<!--</div>-->
+	
+	<div class="outside">
+		<div id="left">
+				
+		</div>
+
+		<div id="jumbo-border">
+			<h1 id="output">Do a A-OK sign</h1> 
+			<img hidden  id="v-signImage" src="images/V-sign.png">
+			<img  id="ok-gray" src="images/A-Ok-sign_gray.png">
+			<img hidden  id="rock-signImage" src="images/Rock-sign.png">
+			<img hidden  id="ok-signImage" src="images/A-Ok-sign.png">
+			<img hidden id="rock-gray" src="images/Rock-Sign_gray.png">
+			<img hidden id="v-sign-gray" src="images/V-sign_gray.png">
+		</div>
+	
+		<div id="right" style="opacity: 0;">
+			<h2 id="Info_header">A-OK sign</h2>
+			<p id="description" style="font-weight: bold; font-size: 20px"> From insinuating someone is homosexual to calling them an A-hole or simply as a shorthand for Fuck you, the A-OK sign does not necessarily travel well</p>
+			<button type="button" id="nextLevel">Next Level</button>
+
+
+		</div>
+	</div>
+
+
+	<div id="buttons">
+		<button type="button" id="ok-sign">A-OK</button>
+		<button type="button" id="rock-sign">ROCK </button>
+		<button type="button" id="V-sign">PEACE </button>
+
+
+		<p id="handCount">0:Hand(s) detected</p>
+		<p id="handHeight"></p>
+		<p id="optimalHeight"></p>
+	</div>
+
+	<script src="lib/leap.js"></script>
+	<script src="leaptrainer.js"></script>
+	<script src="trainer-ui/js/jquery.min.js"></script>
+		<script src="responsivevoice.js"></script>
+
+	<audio controls hidden id="bleepSound">
+           <source src="button-3.mp3" type="audio/mpeg">
+      	Your browser does not support the audio element.
+    </audio>
+    <audio controls hidden id="myVid">
+           <source src="https://www.sounddogs.com/sound-effects/104/mp3/526217_SOUNDDOGS__cr.mp3" type="audio/mpeg">
+      	Your browser does not support the audio element.
+    </audio>
+     <audio controls hidden id="myVid2">
+           <source src="https://www.sounddogs.com/sound-effects/104/mp3/526214_SOUNDDOGS__cr.mp3" type="audio/mpeg">
+      	Your browser does not support the audio element.
+    </audio>
+        <audio controls hidden id="myVid3">
+           <source src="http://www.freesfx.co.uk/rx2/mp3s/10/12549_1435111880.mp3" type="audio/mpeg">
+      	Your browser does not support the audio element.
+    </audio>
+   
+   
+   
+
+
+	<script>
+		$(document).ready(function()
+		{
+			// Loading all of the HTML id's into objects(for faster lookup)
+			var audio = $("#bleepSound")[0];
+			var handCounter = $("#handCount");
+			var handHeight = $("#handHeight");
+			var optimalHeight = $("#optimalHeight");
+			var output = $("#output");
+			var vid = document.getElementById("myVid"); 
+			var vid2 = document.getElementById("myVid2"); 
+			var vid3 = document.getElementById("myVid3"); 
+
+			var trainer = new LeapTrainer.Controller();
+
+			var level = 0;
+
+			// ------The Leap Loop-------
+			// This loop is just for displaying the number of hands and hand position
+			Leap.loop(function(frame) {
+				var currentNumOfHands = frame.hands.length
+				handCounter.html(currentNumOfHands + ":Hand(s) Detected");
+				if(currentNumOfHands == 1) {
+					handHeight.html(
+						"x: " + frame.hands[0].palmPosition[0] + 
+						" y: " + frame.hands[0].palmPosition[1] + 
+						" z: " + frame.hands[0].palmPosition[2]);
+					if((frame.hands[0].palmPosition[1] < 165) && (frame.hands[0].palmPosition[1] > 95)) {
+						optimalHeight.html("Hand in optimal height from sensor");
+					}
+					else {
+						optimalHeight.html("Hand NOT in optimal height from sensor");
+					}
+				}
+			});
+		
+			function process_Word(new_word) {
+			//	responsiveVoice.speak(new_word);
+				output.html(new_word);
+				
+			};
+			
+			// super rndant functions that are needed because of some weird error
+		
+			function call_a_ok() {
+				if(level == 0){
+
+					process_Word("A-OK");
+					vid.play(); 
+					$("#ok-gray").hide('fast');
+				    $("#ok-signImage").show('fast');//.delay(3000).fadeIn(100);
+				    $("#right").animate({
+				    	opacity: '1'
+				    },"slow");
+				}
+
+			};
+			function call_rock_sign() {
+				if(level == 1){
+					process_Word("ROCK-SIGN");
+					vid.play(); 
+					$("#rock-gray").hide('fast');
+
+					$("#rock-signImage").show('fast');//.delay(3000).fadeIn(100);
+					$("#description").html("A favourite gesture of many a rocker; in some parts of the world, the Corna is a not so subtle way of saying i am having intercourse with your wife behind your back. Use at your peril ");
+					$("#Info_header").html("ROCK-SIGN");
+
+					$("#right").animate({
+				    	opacity: '1'
+				    },"slow");
+				}
+			};
+
+			function call_v_sign() {
+				if (level == 2) {
+				process_Word("V-SIGN");
+				vid.play(); 
+				$("#v-sign-gray").hide('fast');
+				$("#v-signImage").show('fast');
+				$("#description").html("While the V sign means peace whichever way you look at it in much of the world, but in the UK and some other commonwealth countries showing your fingernails is closer to a declaration of war");
+				$("#Info_header").html("V-SIGN");
+
+				$("#right").animate({
+					opacity: '1'
+				},"slow");
+				//.delay(3000).fadeIn(100);
+				};
+
+			};
+
+			/*function call_fist() {
+				process_Word("fist");
+				
+			};*/
+			
+			// The functions for the test buttons(they will be removed later)
+			$("#ok-sign").click(function() {
+				if(level === 0){
+					process_Word("A-OK");
+
+					call_a_ok();
+				}
+
+			});
+			$("#rock-sign").click(function() {
+				if(level === 1){
+					process_Word("ROCK-SIGN");
+					call_rock_sign();
+				}
+			});
+
+
+			$("#nextLevel").click(function() {
+				//process_Word("V-sign");
+				
+				if(level === 0){
+					$("#output").html("Do a ROCK-SIGN")
+					$('#ok-signImage').hide('fast');
+					$('#rock-gray').show('fast');
+					$("#right").animate({
+				    	opacity: '0'
+				    },"slow");
+
+				}
+				else if(level === 1){
+					$("#output").html("Now the PEACE-SIGN")
+					$('#rock-signImage').hide('fast');
+					$('#v-sign-gray').show('fast');
+					$("#right").animate({
+				    	opacity: '0'
+				    },"slow");
+				    $("#nextLevel").hide('fast');
+					
+				}
+				/*else if(level === 2){
+					$("#output").html("Now the PEACE-SIGN")
+					$('#rock-signImage').hide('fast');
+					$('#v-sign-gray').show('fast');
+					$("#right").animate({
+				    	opacity: '0'
+				    },"slow");
+					
+				}*/
+
+				level += 1;
+
+
+			});
+
+
+			$("#V-sign").click(function() {
+				//process_Word("V-sign");
+				if(level === 2){
+					process_Word("V-sign");
+					call_v_sign();
+				}
+
+
+			});
+			
+			// Load in all of the gestures and make LeapTrainer start to detect them
+			$.get("gestures/new_a_ok.txt", function(data) {
+				trainer.fromJSON(data);
+				trainer.on('A-OK', call_a_ok);
+			}, "text");
+
+			$.get("gestures/newV-sign.txt", function(data) {
+				trainer.fromJSON(data);
+				trainer.on('V-SIGN', call_v_sign);
+			}, "text");
+
+			$.get("gestures/newRockSign.txt", function(data) {
+				trainer.fromJSON(data);
+				trainer.on('ROCK-SIGN', call_rock_sign);
+			}, "text");
+
+			/*$.get("gestures/fist.txt", function(data) {
+				trainer.fromJSON(data);
+				trainer.on('FIST', call_fist);
+			}, "text");*/
+
+			/*$.get("gestures/v_sign_json.txt", function(data) {
+				trainer.fromJSON(data);
+				trainer.on('V_SIGN', call_v_sign);
+			}, "text");*/
+
+		});
+	</script>
+    <style>
+		#heading {
+			padding-left: 25px;
+		
+		}
+
+		#outside {
+			width: 800px;
+			height: 550px;
+		}
+		#jumbo-border {
+			text-align: center;
+			
+			margin-top: 30px;
+			width: 500px;
+			height: 500px;
+			float: left;	
+			margin-left: 10px;
+						background-color: #F1A94E;
+
+
+	
+		}
+
+		#left {
+			float: left;
+			margin-top: 30px;
+			width: 140px;
+			height: 500px;
+
+
+
+	
+			margin-left: 200px;
+
+		}
+		#right {
+			padding: 30px 30px 0px 30px;
+			float: left;
+			margin-left: 10px;
+			width: 300px;
+			height: 470px;
+			background-color:  #E45641;
+
+			margin-top: 30px;
+
+
+		}
+		#buttons{
+			
+			bottom: 0;
+			position: absolute;
+			padding-bottom: 
+
+		}
+		h1 {
+			text-align: center;
+			color: white;
+
+		}
+		h2 {
+			color: white;
+
+		}
+		 img {
+			
+			height: 400px;
+		
+		}
+		body {
+			background-color:  #7B8D8E;
+    		color: white;
+    		font-style: bold ;
+    		font-family: "Arial";
+		}
+		#nextLevel {
+			font-size: 15px;
+		}
+
+	</style>
+</body>
+</html>

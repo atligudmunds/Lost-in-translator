@@ -1,0 +1,80 @@
+#heading {
+	padding-left: 25px;
+}
+
+#jumbo-border {
+	text-align: center;
+
+	/*width: 400px;
+	height: 400px;*/
+
+	float: left;	
+	background-color: lightblue;
+	margin-top: 8%;
+}
+
+/*#left {
+	float: left;
+	margin-top: 30px;
+	width: 140px;
+	height: 500px;
+	margin-left: 200px;
+
+}*/
+#right {
+	/*padding: 30px 30px 0px 30px;
+	background-color: #E45641;*/
+	/*margin-top: 30.0em;*/
+	margin-top: 31%;
+	padding-left: 5px;
+	display: inline-block;
+	width: 75%;
+	/*width: 1120px;*/
+	float: left;
+
+
+}
+
+#buttons {
+
+	/*bottom: 0;
+	position: absolute;
+	padding-bottom:*/ 
+
+}
+h1 {
+	text-align: center;
+	color: white;
+}
+h2 {
+	color: white;
+
+}
+img {
+	height: 400px;
+	padding-bottom: 5px;
+}
+
+body {
+
+	/*background-image: url('images/Prufa3.gif');*/
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: top center; 
+	background-size: 98% 78%;
+
+	background-color:  #337fcc;
+	color: white;
+	font-style: bold;
+	font-family: "Arial";
+}
+
+#nextLevel {
+	font-size: 11px;
+}
+
+#description {
+	font-size: 25px;
+
+
+}

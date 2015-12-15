@@ -1,0 +1,158 @@
+#heading {
+	padding-left: 25px;
+
+}
+#bottom {
+	height: 100px;
+	width: 1300px;
+	position: absolute;
+	margin-top: 300px;
+}
+#right {
+	height: 100px;
+	width: 900px;
+	float: left;
+	margin-top: 202px;
+	position: absolute;
+	/*z-index: 3;*/
+
+
+}
+#jumbo-border {
+	text-align: center;
+	/*background-color: lightblue;*/
+	width: 300px;
+	/*display: inline-block;*/
+	float: right;
+	/*z-index: 3;*/
+	/*background-image: url('images/Hand-frame.png');*/
+}
+
+#backgroundGif {
+	width:1300px; 
+	height: 550px;
+	background-image: url('images/Prufa3.gif');
+	background-repeat: no-repeat;
+	 background-size: 1150px 550px;
+	background-position: center; 
+	position: absolute;
+}
+
+
+body {
+	/*background-color:  #337fcc;*/
+	background-color: #0e0e0e;
+
+	color: white;
+	font-style: bold;
+	font-family: "Arial";
+	margin-top: 0px;
+	overflow: hidden;
+}
+#nextLevel {
+	font-size: 11px;
+}
+/*#inner_fixed {
+    height: 100px;
+    width: 300px;
+    background-color: grey;
+}*/
+
+
+
+h1 {
+	text-align: center;
+	color: white;
+}
+h2 {
+	color: white;
+		padding-left: 20px;
+
+
+}
+ img {
+	height: 300px;
+	padding-bottom: 5px;
+}
+#swipeImage {
+	height: 300px;
+
+}
+#master {
+	height: 600px;
+	width: 1300px;
+	/*border: 2px solid black;*/
+	position: absolute;
+	margin-left: 20px;
+	overflow: visible;
+}
+#description {
+	padding-left: 30px;
+	font-weight: bold; 
+	font-size: 34px;
+}
+
+#hand-frame {
+	display: block;
+	position: absolute;
+	z-index: 1;
+	margin-top: -25px;
+	margin-left: -25px;
+
+	width: 325px;
+	height: auto;
+}
+
+#ok-gray {
+	z-index: 3;
+	position: absolute;
+	margin-left: -110px;
+}
+
+#ok-signImage {
+	z-index: 3;
+	position: absolute;
+	margin-left: -110px;
+}
+
+/*#left {
+	float: left;
+	margin-top: 30px;
+	width: 140px;
+	height: 500px;
+	margin-left: 200px;
+
+}*/
+#buttons {
+
+	/*bottom: 0;
+	position: absolute;
+	padding-bottom:*/ 
+
+}
+
+#panel {
+	/*background-color: #bf2c36;*/
+	background: -moz-linear-gradient(top, #ef0011, #640000);
+	/* later value: #6a171d*/
+	position: absolute;
+	margin-left: -10%;
+	top: 525px;
+	height: 200px;
+	width: 120%;
+	border-color: #5b0000;
+	border-width: 3px;
+	border-style: solid;
+	/*z-index: 1;*/
+}
+
+/*#right {
+
+
+	margin-top: 29%;
+	padding-left: 5px;
+	display: inline-block;
+	width: 75%;
+	
+	float: left;
+}*/
