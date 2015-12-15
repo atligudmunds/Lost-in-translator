@@ -12,7 +12,7 @@
 	height: 100px;
 	width: 900px;
 	float: left;
-	margin-top: 202px;
+	margin-top: 252px;
 	position: absolute;
 	/*z-index: 3;*/
 
@@ -30,10 +30,10 @@
 
 #backgroundGif {
 	width:1300px; 
-	height: 550px;
+	height: 600px;
 	background-image: url('images/Prufa3.gif');
 	background-repeat: no-repeat;
-	 background-size: 1150px 550px;
+	 background-size: 1150px 600px;
 	background-position: center; 
 	position: absolute;
 }
@@ -71,7 +71,7 @@ h2 {
 
 }
  img {
-	height: 300px;
+	height: 375px;
 	padding-bottom: 5px;
 }
 #swipeImage {
@@ -137,7 +137,7 @@ h2 {
 	/* later value: #6a171d*/
 	position: absolute;
 	margin-left: -10%;
-	top: 525px;
+	top: 575px;
 	height: 200px;
 	width: 120%;
 	border-color: #5b0000;

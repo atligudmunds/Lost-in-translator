@@ -28,13 +28,13 @@
 			<!--	<h1 id="output">Do a A-OK sign</h1> -->
 				<!--<img id="hand-frame" src="images/Hand-frame_3.png">-->
 				<img hidden  id="v-signImage" src="images/V-sign.png">
-				<img  id="ok-gray" src="images/A-Ok-sign-real_gray_outline.png">
+				<img  id="ok-gray" src="images/A-Ok-sign-real_gray_border2.png">
 				<img hidden  id="rock-signImage" src="images/Rock-sign.png">
 				<img hidden  id="ok-signImage" src="images/A-Ok-sign-real.png">
 				<img hidden id="rock-gray" src="images/Rock-Sign_gray.png">
 				<img hidden id="v-sign-gray" src="images/V-sign_gray.png">
-				<img hidden id="thumbs-up-gray" src="images/Thumbs-up-sign_gray.png">
-				<img hidden id="thumbs-up" src="images/Thumbs-up-sign.png">
+				<img hidden id="thumbs-up-gray" src="images/thumbs-up-real_gray_outline.png">
+				<img hidden id="thumbs-up" src="images/thumbs-up-real.png">
 				<img hidden id="swipeImage" src="images/swipe_image.png" style="height:200px">
 				
 
@@ -114,20 +114,23 @@
 			});
 		
 			function startUpFun () {
-				description.textillate({
-					initialDelay: 500,
-					minDisplayTime: 0,
-					loop: false,
-					in: {
-						effect: 'fadeIn',
-						delayScale: 1.5,
-						delay: 25
-					},
-					out: {effect: 'fadeOut',
-							sync: true
-					}
+				//setTimeout(function(){
+					description.textillate({
+						initialDelay: 500,
+						minDisplayTime: 0,
+						loop: false,
+						in: {
+							effect: 'fadeIn',
+							delayScale: 1.5,
+							delay: 25
+						},
+						out: {effect: 'fadeOut',
+								sync: true
+						}
 
-				});
+					});
+				//}, 750);
+				//description.css("opacity", "1");
 				//alert(description.text());
 				//responsiveVoice.speak("The chef brings you a delicious pizza pie");
 				
@@ -174,24 +177,26 @@
 					$("#ok-gray").hide('fast');
 				    $("#ok-signImage").show('fast');
 				    //$("#description").html("From insinuating someone is homosexual to calling them an A-hole or simply as a shorthand for Fuck you, the A-OK sign does not necessarily travel well ");
-				    $("#description").html("The chef is actually from Turkey ");
+				    /*$("#description").html("The chef is actually from Turkey and there the A-OK sign is used to call someone an asshole, what's wrong with you!?");*/
+				    description.find('.texts li:first').text("The chef is actually from Turkey and there the A-OK sign is used to call someone an asshole, what's wrong with you!?");
+					description.textillate('start');
 				    $("#backgroundGif").css("background-image", "url(images/Prufa2.jpg)"); 
 
-				    $("#right").animate({
+				    /*$("#right").animate({
 				    	opacity: '1'
-				    },"slow");
+				    },"slow");*/
 				    // setting a timeout so people don't accidentally swipe
 				    // to the next level right after doing the gesture
 				    setTimeout(function(){
 				    	//alert("time has COME!!!");
 				    	levelOver = 1;
-				    }, 1000);
+				    }, 3500);
 				    
 				    swipeTimeout = window.setTimeout(function() {
 				     $("#ok-signImage").hide('fast');
 
 				    	$("#swipeImage").fadeIn('slow');
-				    }, 3600);
+				    }, 7000);
 				}
 			};
 
