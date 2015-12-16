@@ -50,6 +50,19 @@
            <source src="https://www.sounddogs.com/sound-effects/104/mp3/526217_SOUNDDOGS__cr.mp3" type="audio/mpeg">
       	Your browser does not support the audio element.
     </audio>
+    <audio controls hidden id="Music1" loop>
+           <source src="Music/italia.mp3" type="audio/mpeg"  >
+      	Your browser does not support the audio element.
+    </audio>
+      <audio controls hidden id="Music2" loop>
+           <source src="Music/usa.mp3" type="audio/mpeg" >
+      	Your browser does not support the audio element.
+    </audio>
+      <audio controls hidden id="Music3" loop>
+           <source src="Music/frakkland.mp3" type="audio/mpeg">
+      	Your browser does not support the audio element.
+    </audio>
+    
     
   
 	<script>
@@ -66,7 +79,19 @@
 			var levelOver = 0;
 			var swipeTimeout;
 
+			
 			var vid = document.getElementById("myVid");
+			var musik1 = document.getElementById("Music1");
+			var musik2 = document.getElementById("Music2");
+			var musik3 = document.getElementById("Music3");
+
+
+			$(document).ready(function(){
+        		$("#Music1")[0].volume = 0;
+       			 $("#Music1").animate({volume: 1}, 1000);
+     		 });
+
+			musik1.play()
 
 			var swiper = new Leap.Controller({enableGestures: true});
 
@@ -124,6 +149,8 @@
 
 			startUpFun();
 
+
+
 			function textPage2 () {
 				//description.text("Show him your graditude by doing the A-OK sign");
 				description.find('.texts li:first').text('Show him your gratitude by doing the A-OK sign');
@@ -157,6 +184,13 @@
 			function call_a_ok() {
 				if(level == 0){
 					process_Word("A-OK");
+
+				$(document).ready(function(){
+	       			 $("#Music1").animate({volume: 0}, 2000);
+	       			 $("#myVid").animate({volume: 1}, 2500);
+	       			 $("#Music1").animate({volume: 1}, 7000);
+     			 });
+
 					vid.play();
 					trainer.pause();
 
@@ -195,6 +229,16 @@
 			function call_rock_sign() {
 				if(level == 1){
 					process_Word("ROCK-SIGN");
+					
+
+				$(document).ready(function(){
+	       			 $("#Music2").animate({volume: 0}, 2000);
+	       			 $("#myVid").animate({volume: 1}, 2500);
+	       			 $("#Music2").animate({volume: 1}, 7000);
+     			 });
+
+
+
 					vid.play(); 					
 					trainer2.pause();
 		
@@ -231,6 +275,14 @@
 			function call_thumbsUp() {
 				if (level == 2) {
 					process_Word("THUMBS UP");
+
+
+				$(document).ready(function(){
+	       			 $("#Music3").animate({volume: 0}, 2000);
+	       			 $("#myVid").animate({volume: 1}, 2500);
+	       			 $("#Music3").animate({volume: 1}, 7000);
+     			 });
+	    	
 					vid.play();
 					trainer4.pause();
 					$("#thumbs-up-gray").hide('fast');
@@ -267,7 +319,7 @@
 					//$("#swipeImage").delay(3600).fadeIn('fast');
 				};
 			};
-
+      
 			
 			// The functions for the test buttons(they will be removed later)
 			$("#ok-sign").click(function() {
@@ -300,6 +352,8 @@
 					if(level === 0) {
 						//swipe_trainer.pause();
 						//console.log("PHASE 1");
+						musik1.pause()
+						musik2.play()
 						window.clearTimeout(swipeTimeout);
 					    swipeTimeout = undefined;
 						$("#swipeText").animate({
@@ -336,6 +390,8 @@
 						//swipe_trainer.pause();
 						//swiper.disconnect();
 						//$('#swipeText').hide('fast');
+						musik2.pause();
+						musik3.play();
 						window.clearTimeout(swipeTimeout);
 					    swipeTimeout = undefined;
 						$("#swipeText").animate({
@@ -446,7 +502,7 @@
 				trainer4.fromJSON(data);
 				trainer4.on('JUSTTUMB', call_thumbsUp);
 			}, "text");
-			
+
 
 		});
 	</script>
