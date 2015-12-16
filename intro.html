@@ -4,16 +4,20 @@
 	 <meta charset="utf-8">
 	 <!--<link href="animate.css" rel="stylesheet">
 	 <link rel="stylesheet" type="text/css" href="Mysheet_brynja4.css">-->
+
 	
 </head>
-<body bgcolor="darkgray">
+<body  > <!--background="images/INTRO.gif" style="background-repeat: no-repeat; background-position: center;  background-size: 1300px 800px;">-->
 
-	<p>  INTO SIDE</p>
+	<div id="background">
+    	<img src="images/INTRO.gif" class="stretch" alt="" />
+
+</div>
 
 
 
 
-	<button type="button" id="takki">Click me</button>
+	<!--<button type="button" id="takki">Click me</button>-->
 
 
 
@@ -54,6 +58,26 @@
 		});
 	</script>
 
+	<style >
+	#background {
+    width: 100%; 
+    height: 100%; 
+    position: fixed; 
+    left: 0px; 
+    top: 0px; 
+    z-index: -1; /* Ensure div tag stays behind content; -999 might work, too. */
+}
+
+.stretch {
+    width:100%;
+    height:100%;
+}
+</style>
 
 </body>
 </html>
+
+
+
+
+

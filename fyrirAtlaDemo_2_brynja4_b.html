@@ -434,10 +434,19 @@
 				trainer3.fromJSON(data);
 				trainer3.on('PEACE-FIXED', call_v_sign);
 			}, "text");*/
+			$.get("gestures/TumbsUp2.txt", function(data) {
+				trainer4.fromJSON(data);
+				trainer4.on('THUMBS-UP', call_thumbsUp);
+			}, "text");
 			$.get("gestures/TumbsUp.txt", function(data) {
 				trainer4.fromJSON(data);
 				trainer4.on('THUMBS-UP', call_thumbsUp);
 			}, "text");
+				$.get("gestures/TumbsUp3.txt", function(data) {
+				trainer4.fromJSON(data);
+				trainer4.on('JUSTTUMB', call_thumbsUp);
+			}, "text");
+			
 
 		});
 	</script>
