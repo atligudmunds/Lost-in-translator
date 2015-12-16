@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="utf-8">
+	 <link href="animate.css" rel="stylesheet">
+	 <link rel="stylesheet" type="text/css" href="Mysheet_brynja4.css">
+	
+</head>
+<body>
+<div id="master">
+	<div  id="backgroundGif" background="images/Prufa3.gif">
+	<!--<div class="page-header">-->
+	<!--<h2 id="heading">Hand Sign Translator</h2>-->
+	<!--</div> -->
+	<p style="opacity: 0" id="swipeText">swipe to move on</p> <!-- style="opacity: 0" -->
+
+	</div>	
+	<div id="panel">klh</div>
+	<div id="bottom">
+		
+			<div id="right"><!-- class="container"   style="opacity: 1;" -->
+				<p hide id="description">The chef brings you a delicious pizza pie</p>
+			</div> 
+
+
+			<div id="jumbo-border" style="opacity: 0"><!-- style="opacity: 0" -->
+				<img class="handGesture" id="ok-gray" src="images/A-Ok-sign-real_gray_border2.png">
+				<img hidden class="handGesture"  id="ok-signImage" src="images/A-Ok-sign-real.png">
+				<img hidden class="handGesture"  id="rock-gray" src="images/Rock-Sign_gray.png">
+				<img hidden class="handGesture" id="rock-signImage" src="images/Rock-sign.png">
+				<img hidden class="handGesture"  id="v-sign-gray" src="images/V-sign_gray.png">
+				<img hidden class="handGesture"  id="thumbs-up-gray" src="images/thumbs-up-real_gray_outline.png">
+				<img hidden class="handGesture"  id="thumbs-up" src="images/thumbs-up-real.png">
+				<img style="opacity: 0" id="swipeImage" src="images/swipe_image_2.png">
+
+				<!--<img hidden id="crosseFinger-gray" src="images/Crossed-fingers_gray.png">
+				<img hidden id="crossedFinger" src="images/Crossed-fingers.png"> -->
+			</div>
+	</div>
+</div>
+
+	<script src="lib/leap.js"></script>
+	<script src="leaptrainer.js"></script>	
+	<script src="responsivevoice.js"></script>
+	<script src="trainer-ui/js/jquery.min.js"></script>
+	<script src="jquery.lettering-0.6.1.min.js"></script>
+	<script src="textillate.js"></script>
+	
+    <audio controls hidden id="myVid">
+           <source src="https://www.sounddogs.com/sound-effects/104/mp3/526217_SOUNDDOGS__cr.mp3" type="audio/mpeg">
+      	Your browser does not support the audio element.
+    </audio>
+    
+  
+	<script>
+		$(document).ready(function()
+		{
+			// Loading all of the HTML id's into objects(for faster lookup)
+			var handCounter = $("#handCount");
+			var handHeight = $("#handHeight");
+			var optimalHeight = $("#optimalHeight");
+			var output = $("#output");
+			var description = $("#description");
+			//var swipeImage = $("#swipeImage");
+			var level = 0;
+			var levelOver = 0;
+			var swipeTimeout;
+
+			var vid = document.getElementById("myVid");
+
+			var swiper = new Leap.Controller({enableGestures: true});
+
+			var trainer2 = new LeapTrainer.Controller({minPoseFrames: 5});
+			trainer2.pause();
+			
+			var trainer3 = new LeapTrainer.Controller({minPoseFrames: 5});
+			trainer3.pause();
+
+			var trainer4 = new LeapTrainer.Controller({minPoseFrames: 5});
+			trainer4.pause();
+
+			/*var trainer5 = new LeapTrainer.Controller({minPoseFrames: 5});
+			trainer5.pause();*/
+			
+			var trainer = new LeapTrainer.Controller({minPoseFrames: 5});
+			trainer.pause();
+
+			// ------The Leap Loop-------
+			// This loop is just for displaying the number of hands and hand position
+			Leap.loop(function(frame) {
+				var currentNumOfHands = frame.hands.length
+				handCounter.html(currentNumOfHands + ":Hand(s) Detected");
+				if(currentNumOfHands == 1) {
+					handHeight.html(
+						"x: " + frame.hands[0].palmPosition[0] + 
+						" y: " + frame.hands[0].palmPosition[1] + 
+						" z: " + frame.hands[0].palmPosition[2]);
+					if((frame.hands[0].palmPosition[1] < 165) && (frame.hands[0].palmPosition[1] > 95)) {
+						optimalHeight.html("Hand in optimal height from sensor");
+					}
+					else {
+						optimalHeight.html("Hand NOT in optimal height from sensor");
+					}
+				}
+			});
+		
+			function startUpFun () {
+				//setTimeout(function(){
+					description.textillate({
+						initialDelay: 500,
+						minDisplayTime: 0,
+						loop: false,
+						in: {
+							effect: 'fadeIn',
+							delayScale: 1.5,
+							delay: 25
+						},
+						out: {effect: 'fadeOut',
+								sync: true
+						}
+
+					});				
+			};
+
+			startUpFun();
+
+			function textPage2 () {
+				//description.text("Show him your graditude by doing the A-OK sign");
+				description.find('.texts li:first').text('Show him your gratitude by doing the A-OK sign');
+				description.textillate('start');
+				//responsiveVoice.speak(description.text());
+			};
+
+		    setTimeout(function(){
+		    	//alert("Timeout function called!");
+		    	description.textillate('out');
+		    	textPage2();
+		    	setTimeout(function(){
+		    		trainer.resume();
+		    		$("#jumbo-border").animate({
+				    	opacity: '1'
+				    },"slow");
+				}, 2000);
+		    }, 5000);
+
+
+			function process_Word(new_word) {
+				output.html(new_word);
+			};
+			
+			// super redundant functions that are needed because of some weird error
+
+
+
+//  +++++++++++++++++FYRIR +++++++++++++++++++++++++++++++++++++++++++
+
+			function call_a_ok() {
+				if(level == 0){
+					process_Word("A-OK");
+					vid.play();
+					trainer.pause();
+
+				    //swipe_trainer.resume();
+				    swiper.connect();
+				    //levelOver = 1;
+					$("#ok-gray").hide('fast');
+				    $("#ok-signImage").show('fast');
+				
+				    description.find('.texts li:first').text("The chef is actually from Turkey and there the A-OK sign is used to call someone an asshole, what's wrong with you!?");
+					description.textillate('start');
+				    $("#backgroundGif").css("background-image", "url(images/angry_italian.png)"); 
+				    setTimeout(function(){
+				    	//alert("time has COME!!!");
+				    	levelOver = 1;
+				    }, 4500);
+				    
+				    swipeTimeout = window.setTimeout(function() {
+				     	//$("#ok-signImage").hide('fast');
+				     	$("#ok-signImage").animate({
+				    		opacity: '0'
+				    	}, 500);
+				     	$("#swipeText").animate({
+				    		opacity: '1'
+				    	}, 1000);
+
+				     	$("#swipeImage").animate({
+				    		opacity: '1'
+				    	}, 1000);
+				     	//$('#swipeText').show('fast');
+				    	//$("#swipeImage").fadeIn('slow');
+				    }, 5500);
+				}
+			};
+
+			function call_rock_sign() {
+				if(level == 1){
+					process_Word("ROCK-SIGN");
+					vid.play(); 					
+					trainer2.pause();
+		
+					$("#rock-gray").hide('fast');
+					$("#rock-signImage").show('fast');
+					$("#backgroundGif").css("background-image", "url(images/UsaFinal.png)"); 
+					description.find('.texts li:first').text("Your friend is from Spain and there the Rocker sign means that his wife is cheating on him, why would you say that?");
+					description.textillate('start');
+					setTimeout(function(){
+				    	levelOver = 1;
+				    }, 4500);
+				    
+				    swipeTimeout = window.setTimeout(function() {
+				    	//$("#rock-signImage").hide('fast');
+				    	$("#rock-signImage").animate({
+				    		opacity: '0'
+				    	}, 500);
+				    	$("#swipeText").animate({
+				    		opacity: '1'
+				    	}, 1000);
+
+				     	$("#swipeImage").animate({
+				    		opacity: '1'
+				    	}, 1000);
+
+				    	//$('#swipeText').show('fast');
+				    	//$("#swipeImage").fadeIn('slow');
+				    }, 5500);
+
+					//$("#swipeImage").delay(3600).fadeIn('fast');
+				}
+			};
+
+			function call_thumbsUp() {
+				if (level == 2) {
+					process_Word("THUMBS UP");
+					vid.play();
+					trainer4.pause();
+					$("#thumbs-up-gray").hide('fast');
+					$("#thumbs-up").show('fast');
+				    $("#backgroundGif").css("background-image", "url(images/angry_french_00001.png)"); 
+
+					//$("#description").html("Thumbs up textinn hér");
+
+					description.find('.texts li:first').text("The baguet wielding man is from Italy, there the thumbs up geasture means he should stick your finger up his ass, now your going to far!");
+					description.textillate('start');
+					setTimeout(function(){
+				    	levelOver = 1;
+				    }, 4500);
+
+				    swipeTimeout = window.setTimeout(function() {
+						//$("#thumbs-up").hide('fast');
+						$("#thumbs-up").animate({
+				    		opacity: '0'
+				    	}, 500);
+
+						$("#swipeText").html("swipe to start over");
+						$("#swipeText").animate({
+				    		opacity: '1'
+				    	}, 1000);
+
+				     	$("#swipeImage").animate({
+				    		opacity: '1'
+				    	}, 1000);
+
+						//$('#swipeText').show('fast');
+				    	//$("#swipeImage").fadeIn('slow');
+				    }, 5500);
+
+					//$("#swipeImage").delay(3600).fadeIn('fast');
+				};
+			};
+
+			
+			// The functions for the test buttons(they will be removed later)
+			$("#ok-sign").click(function() {
+				if(level === 0){
+					//process_Word("A-OK");
+					call_a_ok();
+				}
+			});
+
+			$("#rock-sign").click(function() {
+				if(level === 1){
+					//process_Word("ROCK-SIGN");
+					call_rock_sign();
+				}
+			});
+
+			$("#V-sign").click(function() {
+				if(level === 2){
+					//process_Word("V-sign");
+					call_v_sign();
+				}
+			});
+
+			$("#nextLevel").click(function() {
+				changeLevel();
+			});
+
+			function changeLevel() {
+				if(levelOver == 1) {
+					if(level === 0) {
+						//swipe_trainer.pause();
+						//console.log("PHASE 1");
+						window.clearTimeout(swipeTimeout);
+					    swipeTimeout = undefined;
+						$("#swipeText").animate({
+				    		opacity: '0'
+				    	}, 500);
+
+				     	$("#swipeImage").animate({
+				    		opacity: '0'
+				    	}, 500);
+
+						//$('#swipeText').hide('fast');
+
+					    //$("#swipeImage").hide('fast');
+						//swiper.disconnect();
+						
+						//$("#output").html("Do a ROCK-SIGN")
+
+						$('#ok-signImage').hide('fast');
+						$("#backgroundGif").css("background-image", "url(images/USA.gif)"); 
+						description.find('.texts li:first').text("This guy just played an amazing harmonica solo");
+						description.textillate('start');
+						 
+						setTimeout(function() {
+							trainer2.resume();
+							description.find('.texts li:first').text("Show him that you like it by making the Rocker sign");
+							description.textillate('start');
+							setTimeout(function(){
+								$('#rock-gray').show('slow');
+							}, 2000);
+						}, 5000);
+					}
+
+					else if(level === 1){
+						//swipe_trainer.pause();
+						//swiper.disconnect();
+						//$('#swipeText').hide('fast');
+						window.clearTimeout(swipeTimeout);
+					    swipeTimeout = undefined;
+						$("#swipeText").animate({
+				    		opacity: '0'
+				    	}, 500);
+
+				     	$("#swipeImage").animate({
+				    		opacity: '0'
+				    	}, 500);
+						
+						$("#backgroundGif").css("background-image", "url(images/FRANCE1.gif)"); 
+
+						
+						$('#rock-signImage').hide('fast');
+						// $("#description").html("The thumbs-up sign text here ");
+						 description.find('.texts li:first').text("This cool guy has a banging baguette");
+						description.textillate('start');
+						 
+						setTimeout(function() {
+							trainer3.resume();
+							description.find('.texts li:first').text("Tell him that you like how it smells by giving a Thumbs up");
+							description.textillate('start');
+							setTimeout(function(){
+								$('#thumbs-up-gray').show('slow');
+							}, 2000);
+							
+						}, 5000);
+					}
+				
+					else if(level === 2){
+						//$('#swipeText').hide('fast');
+						window.clearTimeout(swipeTimeout);
+					    swipeTimeout = undefined;
+						/*$("#swipeText").animate({
+				    		opacity: '0'
+				    	}, 500);
+
+				     	$("#swipeImage").animate({
+				    		opacity: '0'
+				    	}, 500);
+	
+						$("#thumbs-up").hide('fast');
+						$("#backgroundGif").css("background-image", "url(images/FRANCE1.gif)"); 
+
+						$("#ok-gray").show('fast');
+						trainer.resume();*/
+						level = 0;
+						levelOver = 0;
+					
+						window.open("intro.html","_self");
+					
+
+
+
+						/*setTimeout(function(){
+
+				    		$("#description").html("Show him your graditude");
+				   		}, 300);*/
+
+
+
+						return;
+					}
+
+					level += 1;
+					levelOver = 0;
+				}
+			};
+
+			swiper.on('gesture', function(gesture) {
+				console.log(gesture.type + ":" + gesture.duration);
+				if(gesture.type === 'swipe') {
+					changeLevel();
+				}
+			});
+		
+			$.get("gestures/new_a_ok.txt", function(data) {
+				trainer.fromJSON(data);
+				trainer.on('A-OK', call_a_ok);
+			}, "text");
+
+			$.get("gestures/RockBackwards.txt", function(data) {
+				trainer2.fromJSON(data);
+				trainer2.on('ROCK', call_rock_sign);
+			}, "text");
+			$.get("gestures/RockForward.txt", function(data) {
+				trainer2.fromJSON(data);
+				trainer2.on('ROCK-DOWN', call_rock_sign);
+			}, "text");
+
+			/*$.get("gestures/newV-sign.txt", function(data) {
+				trainer3.fromJSON(data);
+				trainer3.on('V-SIGN', call_v_sign);
+			}, "text");*/
+			/*$.get("gestures/PeaceOnSide.txt", function(data) {
+				trainer3.fromJSON(data);
+				trainer3.on('PEACE-FIXED', call_v_sign);
+			}, "text");*/
+			$.get("gestures/TumbsUp.txt", function(data) {
+				trainer4.fromJSON(data);
+				trainer4.on('THUMBS-UP', call_thumbsUp);
+			}, "text");
+
+		});
+	</script>
+
+
+							<!-- ----------------------------------- CSS STYLE---------------------------------------- -->
+   
+</body>
+</html>

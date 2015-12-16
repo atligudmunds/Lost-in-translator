@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="utf-8">
+	 <!--<link href="animate.css" rel="stylesheet">
+	 <link rel="stylesheet" type="text/css" href="Mysheet_brynja4.css">-->
+	
+</head>
+<body bgcolor="darkgray">
+
+	<p>  INTO SIDE</p>
+
+
+
+
+	<button type="button" id="takki">Click me</button>
+
+
+
+	<script src="lib/leap.js"></script>
+	<!--<script src="leaptrainer.js"></script>	
+	<script src="responsivevoice.js"></script>-->
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script>
+		$(document).ready(function()
+		{
+				var swiper = new Leap.Controller({enableGestures: true});
+
+				$("#takki").click(function() {
+					//window.open("file:///C:/Users/Atli/Desktop/HR/%C3%96nn%20V/Lifandi%20T%C3%A6kni/Lost-in-translator/fyrirAtlaDemo_2_brynja4.html","_self");
+
+					window.open("fyrirAtlaDemo_2_brynja4_b.html","_self");
+
+				});
+					
+				
+
+
+
+				swiper.on('gesture', function(gesture) {
+					console.log(gesture.type + ":" + gesture.duration);
+					if(gesture.type === 'swipe') {
+						window.open("fyrirAtlaDemo_2_brynja4_b.html","_self");
+					}
+
+
+				});
+			
+
+
+				swiper.connect();
+
+
+		});
+	</script>
+
+
+</body>
+</html>

@@ -2,27 +2,26 @@
 	padding-left: 25px;
 
 }
+
 #bottom {
 	height: 100px;
 	width: 1300px;
 	position: absolute;
 	margin-top: 300px;
 }
+
 #right {
 	height: 100px;
 	width: 900px;
 	float: left;
 	margin-top: 252px;
 	position: absolute;
-	/*z-index: 3;*/
-
-
 }
+
 #jumbo-border {
 	text-align: center;
 	width: 300px;
 	float: right;
-
 }
 
 #backgroundGif {
@@ -108,17 +107,30 @@ h2 {
 	border-width: 3px;
 	border-style: solid;
 }
-#swipeText {
-	
 
+#swipeText {
 	font-family: "Arial";
 	font-weight: bold;
 	position: absolute;
-	font-size: 40pt;
+	/*font-size: 40pt;*/
+	font-size: 35px;
 	padding-left: 920px;
-	padding-top: 220px;
+	/*padding-top: 220px;*/
+	
+	/*padding-top: 700px;*/
 
+	margin-top: 675px;
+	z-index: 4;
 }
+
+#rock-gray {
+	margin-left: 30px;
+}
+
+#rock-signImage {
+	margin-left: 30px;
+}
+
 /*#hand-frame {
 	display: block;
 	position: absolute;
